@@ -139,30 +139,35 @@ $username = $_SESSION["username"];
 
    <!-- Modal body -->
         <div class="modal-body">
-          <form action="jobs-data.php" method="post">
-    <div class="form-group">
-      <label for="title">Title:</label>
-      <input type="text" class="form-control" id="title" placeholder="Enter title" name="title">
-    </div>
+            <div  id="f1">
+               <form  action="jobs-data.php" method="post">
+                  <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" class="form-control" id="title" placeholder="Enter title" name="title">
+                  </div>
 
-    <div class="form-group">
-      <label for="description">Description:</label>
-      <input type="text" class="form-control" id="description" placeholder="Enter your type of description" name="description">
-    </div>
+                  <div class="form-group">
+                    <label for="description">Description:</label>
+                    <input type="text" class="form-control" id="description" placeholder="Enter your type of description" name="description">
+                  </div>
 
-    <div class="form-group">
-      <label for="date_posted">Date Posted:</label>
-      <input type="date" class="form-control" id="date_posted" placeholder="Enter date posted" name="date_posted">
-    </div>
+                  <div class="form-group">
+                    <label for="date_posted">Date Posted:</label>
+                    <input type="date" class="form-control" id="date_posted" placeholder="Enter date posted" name="date_posted">
+                  </div>
 
-    <div class="form-group">
-      <label for="closing_date">Closing Date:</label>
-      <input type="date" class="form-control" id="closing_date"  name="closing_date">
-    </div>
-
-      <button type="submit"  class="btn btn-primary">Submit</button>
-    </div>
-  </form>
+                  <div class="form-group">
+                    <label for="closing_date">Closing Date:</label>
+                    <input type="date" class="form-control" id="closing_date"  name="closing_date">
+                  </div>
+                    
+                    <a id="next" class="btn btn-primary" data-toggle="modal" data-target="#myQuesModal">Next</a>
+                   <!-- <button id="submitbtn" style="visibility: hidden;" type="submit"  class="btn btn-primary">Submit</button>-->
+                    
+                  </div>
+                </form>
+            </div>
+          
         </div>
         
         <!-- Modal footer -->
@@ -173,6 +178,74 @@ $username = $_SESSION["username"];
       </div>
     </div>
   </div>
+
+
+
+
+   <!-- The Modal -->
+  <div class="modal" id="myQuesModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Post Jobs</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+   <!-- Modal body -->
+        <div class="modal-body">
+          
+            <div class="p-2" id="f2"> 
+                <form id="uploadQues"  method="post">
+
+                  <?php
+                     $status = false;
+                        $query = 'SELECT * FROM jobs ORDER BY job_id DESC LIMIT 1';
+                        $connect = mysqli_connect("localhost", "root", "", "e-recruitment");
+                        $result = mysqli_query($connect, $query);
+
+                        $arr = array();
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_array($result)) {
+
+                              $id=$row['job_id'];
+                              $id=$id+1;
+                               echo '<div class="form-group">
+
+                                        <div>
+                                       <b> Job id: </b>'.$id.'<br>
+                                        <div>
+                                        <hr>
+                                        <label for="question"><b>Question:</b></label>
+                                        <input type="text" class="form-control" id="question" name="question" placeholder="Enter the question" name="question">
+                                      </div>
+                                      <div style="visibility: hidden;" id=""></div>
+                                      <div class="form-group">
+                                        <label for="answer"><b>Answer:</b></label>
+                                        <input type="text" class="form-control" id="answer" name="answer" placeholder="Enter your type of answer" name="answer">
+                                      </div>
+                                        <a onclick="submitQues()"  class="btn btn-primary">Submit</a>
+                                      </div>';
+                            }
+                        }
+
+                  ?>
+               
+                </form>
+            </div>
+         
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
 </div>   
       <div class="col-sm-6 bg-warning">
         Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
@@ -185,6 +258,27 @@ $username = $_SESSION["username"];
   <p>Footer</p>
 </div>
 
+<script type="text/javascript">
+    function applyFunction() {
 
+      var data = $('#uploadQues').serializeArray();
+       $.ajax({
+        type: 'post',
+        url: "ques_Server.php",
+        data: {
+          form: data  
+        },
+        beforeSend: function() {
+          $('#positions').html('<div style="height:300px" class="ui segment"><div class="ui active inverted dimmer">  <div class="ui text loader">Loading</div></div> <p></p></div>');
+        },
+        success: function(data) {
+
+          $('#submitbtn').click();
+         
+        }
+      });
+     
+    }
+</script>
 </body>
 </html>
