@@ -12,7 +12,7 @@ $username = $_SESSION["username"];
 	 $start_year = $_POST['start_year'];
 
 	 $sql = "INSERT INTO education_data (institute, type_of_qualification, qualification, start_year, end_year, username )
-	 VALUES ('$institute','$type_of_qualification','$qualification', '$start_year', 'end_year', '$username')";
+	 VALUES ('$institute','$type_of_qualification','$qualification', '$start_year', '$end_year', '$username')";
 	 if (mysqli_query($link, $sql)) {
 		echo "<script>
 alert('New record created successfully !') 
