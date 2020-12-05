@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Educational Information</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -152,10 +152,13 @@ $username = $_SESSION["username"];
       <input type="text" class="form-control" id="institute" placeholder="Enter institute or centre" name="institute">
     </div>
 
-    <div class="form-group">
-      <label for="type_of_qualification">Type of qualification:</label>
-      <input type="text" class="form-control" id="type_of_qualification" placeholder="Enter your type of qualification" name="type_of_qualification">
-    </div>
+    <select name="type_of_qualification" id="type_of_qualification" class="custom-select mb-3">
+      <option selected>Type of Qualification</option>
+      <option value="DEGREE">DEGREE</option>
+      <option value="DIPLOMA">DIPLOMA</option>
+      <option value="DIPLOMA">CERTIFICATE</option>
+      <option value="NSSC">NSSC</option>
+    </select>
 
     <div class="form-group">
       <label for="qualification">Qualification:</label>
