@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Personal Details</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -52,7 +52,7 @@
     <div class="row">
       <div class="col-sm-6">
         <form action="user_data.php" method="post">
-          <h3>Personal Information</h3>
+          <h3>Personal Details</h3>
     <?php
                   session_start();
 include_once 'config.php';
