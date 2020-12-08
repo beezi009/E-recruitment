@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Work History</title>
+  <title>My Jobs</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -52,33 +52,29 @@
 <div class="container-fluid">
     <div class="row">
       <div class="col-sm-6">
-        <h3>Work Exprience:</h3>
-        <p>Please add your work exprience.</p>
+        <h3>My Job applications:</h>
     <table class="table table-bordered">
     <thead>
       <tr>
-        <th>#</th>
         <th>Position</th>
-        <th>Date Posted</th>
-        <th>Status</th>
-        <th>Delete</th>
+        <th>Score</th>
       </tr>
     </thead>
     <?php
+                    session_start();
+
                     include 'config.php';
-                    $sql = "SELECT * from work_history ";
+                    $username = $_SESSION["username"];
+                    $sql = "SELECT title,candidate_score 
+FROM candidates, jobs
+Where candidate_id ='$username'";
                     $result = mysqli_query($link,$sql);
                     while($row = mysqli_fetch_assoc($result)){
                              echo '
     <tbody>
       <tr>
-        <td>'.$row['company_name'].'</td>
-        <td>'.$row['position'].'</td>
-        <td>'.$row['start_year'].'</td>
-        <td>'.$row['end_year'].'</td>
-        <td>'.$row['employement_type'].'</td>
-        <td><a href="process_delete_work.php?id='.$row['id'].'"><span class="glyphicon glyphicon-trash"></span></td>
-
+        <td>'.$row['title'].'</td>
+        <td>'.$row['candidate_score'].'</td>
       </tr>
 
      
